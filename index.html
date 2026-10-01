@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f6f9ff">
+<meta name="description" content="دیجی مدیا؛ خدمات حرفه‌ای سوشال مدیا و طراحی ربات‌های اختصاصی با سرعت، کیفیت و پشتیبانی تخصصی.">
+<meta property="og:title" content="دیجی مدیا | قدرت دیجیتال، ساده‌تر و حرفه‌ای‌تر">
+<meta property="og:description" content="خدمات حرفه‌ای اینستاگرام، تلگرام و طراحی ربات‌های اختصاصی.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="images/hero%20vid_037.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="دیجی مدیا">
+<meta name="twitter:description" content="قدرت دیجیتال، ساده‌تر و حرفه‌ای‌تر">
+<title>دیجی مدیا | خدمات دیجیتال و طراحی ربات</title>
+
+<style>
+@font-face{
+  font-family:Vazir;
+  src:url("fonts/Vazir.woff2") format("woff2");
+  font-display:swap;
+}
+@font-face{
+  font-family:Vazirmatn;
+  src:url("fonts/Vazirmatn-Regular.woff2") format("woff2");
+  font-display:swap;
+}
+:root{
+  --primary:#1677ff;
+  --primary2:#5b5cf0;
+  --accent:#16c7c9;
+  --ink:#111827;
+  --muted:#607087;
+  --bg:#f5f8fd;
+  --card:rgba(255,255,255,.68);
+  --line:rgba(255,255,255,.78);
+  --shadow:0 24px 70px rgba(35,65,110,.13);
+  --radius:28px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:Vazir,Vazirmatn,system-ui,sans-serif;
+  overflow-x:hidden;line-height:1.9;
+}
+a{text-decoration:none;color:inherit}
+button{font:inherit}
+img{max-width:100%;display:block}
+::selection{background:rgba(22,119,255,.18)}
+#progress{position:fixed;z-index:1000;top:0;right:0;width:0;height:3px;
+  background:linear-gradient(90deg,var(--accent),var(--primary),var(--primary2));
+  box-shadow:0 0 18px rgba(22,119,255,.35)}
+.ambient{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:-2}
+.blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:.23}
+.b1{width:420px;height:420px;background:#63b3ff;top:6%;right:-130px}
+.b2{width:360px;height:360px;background:#9d8cff;top:45%;left:-130px}
+.b3{width:300px;height:300px;background:#61e2d6;bottom:-100px;right:30%}
+.grain{position:fixed;inset:0;z-index:-1;opacity:.035;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E")}
+.container{width:min(1160px,calc(100% - 40px));margin:auto}
+.glass{background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+header{
+  position:fixed;top:0;right:0;left:0;height:78px;z-index:900;
+  transition:.35s ease;
+}
+header.scrolled{background:rgba(255,255,255,.72);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+  border-bottom:1px solid rgba(40,70,110,.08);box-shadow:0 10px 35px rgba(35,65,110,.07)}
+.nav{height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:900;font-size:21px}
+.brand-mark{width:44px;height:44px;border-radius:14px;overflow:hidden;display:grid;place-items:center;
+  background:linear-gradient(135deg,#fff,#edf4ff);box-shadow:0 8px 22px rgba(22,119,255,.18)}
+.brand-mark img{width:100%;height:100%;object-fit:cover}
+.brand-mark span{font-size:15px;color:var(--primary);display:none}
+.nav-links{display:flex;align-items:center;gap:28px;color:#53647b;font-size:14px;font-weight:700}
+.nav-links a{transition:.25s}.nav-links a:hover,.nav-links a.active{color:var(--primary)}
+.nav-cta{padding:10px 17px;border-radius:14px;color:white!important;background:linear-gradient(135deg,var(--primary),var(--primary2));
+  box-shadow:0 10px 24px rgba(40,95,220,.2)}
+.menu-btn{display:none;border:0;background:transparent;font-size:25px;cursor:pointer}
+.mobile-menu{display:none}
+section{position:relative}
+.hero-wrap{height:calc(100vh + 650px);position:relative}
+.hero-sticky{position:sticky;top:0;height:100vh;min-height:620px;overflow:hidden}
+#heroCanvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-overlay{position:absolute;inset:0;background:
+  radial-gradient(circle at 28% 46%,rgba(255,255,255,.94) 0,rgba(255,255,255,.68) 22%,rgba(255,255,255,.12) 48%,rgba(255,255,255,0) 70%),
+  linear-gradient(90deg,rgba(245,248,253,.85),rgba(245,248,253,.15) 58%,rgba(245,248,253,.05))}
+.hero-content{position:relative;z-index:4;height:100%;display:flex;align-items:center}
+.hero-copy{max-width:600px;padding-top:55px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 13px;border-radius:999px;
+  background:rgba(255,255,255,.7);border:1px solid rgba(22,119,255,.12);color:var(--primary);
+  font-size:13px;font-weight:800;box-shadow:0 12px 35px rgba(30,70,130,.08)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px rgba(22,199,201,.1)}
+h1{font-size:clamp(48px,7vw,88px);line-height:1.05;letter-spacing:-3px;margin:22px 0 16px;font-weight:1000}
+.gradient-text{background:linear-gradient(135deg,#101a30 12%,#176df2 53%,#6a57e9 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-desc{font-size:19px;color:#52647c;max-width:470px;margin:0 0 28px}
+.actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn{border:0;cursor:pointer;padding:13px 21px;border-radius:16px;font-weight:800;transition:.28s;display:inline-flex;align-items:center;gap:9px}
+.btn-primary{color:white;background:linear-gradient(135deg,var(--primary),var(--primary2));box-shadow:0 16px 32px rgba(38,93,218,.2)}
+.btn-secondary{background:rgba(255,255,255,.72);border:1px solid rgba(100,125,160,.16);color:#26364f}
+.btn:hover{transform:translateY(-3px)}
+.hero-floats{position:absolute;inset:0;pointer-events:none;z-index:3}
+.float-card{position:absolute;width:62px;height:62px;border-radius:20px;display:grid;place-items:center;
+  font-size:25px;color:var(--primary);background:rgba(255,255,255,.52);border:1px solid rgba(255,255,255,.85);
+  box-shadow:0 18px 45px rgba(40,75,120,.13);backdrop-filter:blur(15px)}
+.f1{top:22%;right:8%}.f2{top:62%;right:11%}.f3{top:31%;left:8%}.f4{bottom:13%;left:22%}
+.hero-scroll{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:5;color:#718096;font-size:11px;
+  display:flex;flex-direction:column;align-items:center;gap:6px}.mouse{width:22px;height:34px;border:1px solid #9aa9bd;border-radius:14px;position:relative}
+.mouse:after{content:"";position:absolute;width:3px;height:6px;border-radius:3px;background:var(--primary);left:50%;top:7px;transform:translateX(-50%);
+  animation:scrollDot 1.7s infinite}@keyframes scrollDot{50%{top:17px;opacity:.25}100%{top:7px}}
+.ticker{overflow:hidden;background:rgba(255,255,255,.5);border-block:1px solid rgba(40,70,110,.07)}
+.ticker-track{display:flex;width:max-content;animation:marquee 24s linear infinite;padding:17px 0;direction:ltr}
+.ticker-track span{direction:rtl;display:flex;align-items:center;gap:28px;padding:0 28px;font-weight:900;color:#52627a;font-size:14px}
+.ticker-track i{width:7px;height:7px;border-radius:50%;background:var(--accent);display:inline-block}
+@keyframes marquee{to{transform:translateX(-50%)}}
+.section{padding:120px 0}
+.section-head{max-width:690px;margin-bottom:50px}
+.kicker{font-size:13px;color:var(--primary);font-weight:900;margin-bottom:9px}
+.section-title{font-size:clamp(34px,4.5vw,58px);line-height:1.2;margin:0 0 15px;letter-spacing:-1.6px}
+.section-text{color:var(--muted);font-size:16px;margin:0}
+.about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:70px;align-items:center}
+.about-copy p{color:#596a81;font-size:16px;margin:0 0 17px}
+.about-visual{min-height:430px;display:grid;place-items:center;position:relative}
+.orb{width:280px;height:280px;border-radius:50%;background:radial-gradient(circle at 32% 25%,#fff 0,#d9ebff 22%,#91c6ff 50%,#6c67e8 100%);
+  box-shadow:inset -30px -25px 60px rgba(45,66,160,.2),0 45px 100px rgba(40,95,200,.22);position:relative}
+.orb:before,.orb:after{content:"";position:absolute;border:1px solid rgba(255,255,255,.7);border-radius:50%;inset:-35px;transform:rotate(20deg)}
+.orb:after{inset:-62px;transform:rotate(-35deg)}
+.orb-center{position:absolute;inset:0;display:grid;place-items:center;color:white;font-size:42px;font-weight:1000;text-shadow:0 5px 18px rgba(20,40,100,.25)}
+.mini-chip{position:absolute;padding:10px 15px;border-radius:15px;font-size:12px;font-weight:900;color:#41526a;
+  background:rgba(255,255,255,.66);border:1px solid rgba(255,255,255,.85);backdrop-filter:blur(16px);box-shadow:0 18px 35px rgba(50,80,120,.1)}
+.mc1{top:12%;right:4%}.mc2{bottom:12%;left:5%}.mc3{top:48%;left:0}
+.services{padding-top:100px}
+.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.service-card{padding:28px;border-radius:var(--radius);min-height:270px;position:relative;overflow:hidden;transition:.35s}
+.service-card:hover{transform:translateY(-8px);box-shadow:0 32px 75px rgba(35,65,110,.16)}
+.icon-box{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;margin-bottom:23px;
+  background:linear-gradient(135deg,rgba(22,119,255,.14),rgba(91,92,240,.1));color:var(--primary)}
+.icon-box svg{width:27px;height:27px}
+.service-card h3{font-size:21px;margin:0 0 10px}
+.service-card p{color:var(--muted);font-size:14px;margin:0}
+.card-glow{position:absolute;width:130px;height:130px;border-radius:50%;background:var(--accent);opacity:.07;filter:blur(35px);left:-50px;bottom:-60px}
+.bot-banner{margin-top:26px;padding:22px 26px;border-radius:22px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.bot-banner strong{font-size:16px}.bot-banner small{display:block;color:var(--muted);margin-top:2px}
+.contact{padding-bottom:110px}
+.contact-card{padding:50px;border-radius:34px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:30px}
+.contact-card h2{margin:0 0 9px;font-size:clamp(30px,4vw,46px)}
+.contact-card p{color:var(--muted);max-width:650px;margin:0}
+.contact-actions{display:flex;gap:10px;flex-wrap:wrap}
+footer{padding:28px 0 38px;border-top:1px solid rgba(50,75,110,.08);color:#718096;font-size:13px}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;gap:15px}
+.footer-brand{font-weight:1000;color:#24324a;font-size:17px}
+.to-top{position:fixed;right:24px;bottom:24px;width:48px;height:48px;border:1px solid rgba(255,255,255,.8);
+  border-radius:17px;display:grid;place-items:center;z-index:700;background:rgba(255,255,255,.68);backdrop-filter:blur(18px);
+  box-shadow:0 15px 35px rgba(35,65,110,.14);color:var(--primary);cursor:pointer;opacity:0;visibility:hidden;transform:translateY(15px);transition:.3s}
+.to-top.show{opacity:1;visibility:visible;transform:none}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease}
+.reveal.visible{opacity:1;transform:none}
+.loader{position:fixed;inset:0;background:#f5f8fd;z-index:2000;display:grid;place-items:center;transition:.55s}
+.loader.done{opacity:0;visibility:hidden;pointer-events:none}
+.loader-box{text-align:center}.loader-logo{font-size:32px;font-weight:1000;color:#17243b;margin-bottom:15px}
+.loader-bar{width:220px;height:4px;border-radius:99px;background:#e4eaf2;overflow:hidden}
+.loader-fill{width:0;height:100%;background:linear-gradient(90deg,var(--accent),var(--primary),var(--primary2));transition:.2s}
+.loader-note{font-size:11px;color:#8491a3;margin-top:9px}
+.toast{position:fixed;left:50%;bottom:30px;transform:translate(-50%,20px);opacity:0;pointer-events:none;
+  z-index:1500;padding:11px 17px;border-radius:14px;background:rgba(20,31,48,.9);color:white;font-size:12px;transition:.3s}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.mobile-nav{display:none}
+@media(max-width:900px){
+  .nav-links{display:none}.menu-btn{display:block}
+  .mobile-nav{position:absolute;top:72px;right:20px;left:20px;padding:16px;border-radius:22px;display:none;flex-direction:column;gap:7px}
+  .mobile-nav.open{display:flex}.mobile-nav a{padding:10px 12px;border-radius:12px;font-weight:800;color:#52627a}
+  .about-grid{grid-template-columns:1fr;gap:20px}.about-visual{min-height:350px}
+  .service-grid{grid-template-columns:1fr 1fr}
+  .contact-card{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .container{width:min(100% - 28px,1160px)}
+  header{height:68px}.brand{font-size:18px}.brand-mark{width:40px;height:40px}
+  .hero-wrap{height:calc(100vh + 450px)}.hero-sticky{min-height:600px}
+  .hero-overlay{background:linear-gradient(180deg,rgba(245,248,253,.93) 0%,rgba(245,248,253,.7) 45%,rgba(245,248,253,.12) 100%)}
+  .hero-copy{padding-top:30px;max-width:100%}h1{font-size:51px;letter-spacing:-2px}.hero-desc{font-size:16px;max-width:360px}
+  .actions .btn{flex:1;justify-content:center;min-width:145px}.float-card{transform:scale(.72)}.f1{top:18%;right:1%}.f2{top:65%;right:2%}.f3{top:30%;left:0}.f4{display:none}
+  .section{padding:85px 0}.section-head{margin-bottom:32px}.section-title{font-size:35px}
+  .service-grid{grid-template-columns:1fr}.service-card{min-height:230px}
+  .about-visual{min-height:320px}.orb{width:205px;height:205px}.mini-chip{font-size:10px}
+  .contact-card{padding:30px 22px}.contact-actions .btn{width:100%;justify-content:center}
+  .footer-inner{flex-direction:column;align-items:flex-start}.to-top{right:15px;bottom:15px;width:44px;height:44px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}.ticker-track{animation:none}.hero-scroll .mouse:after{animation:none}
+  *,*:before,*:after{transition:none!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<div class="ambient" aria-hidden="true"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="loader" id="loader">
+  <div class="loader-box">
+    <div class="loader-logo">دیجی مدیا</div>
+    <div class="loader-bar"><div class="loader-fill" id="loaderFill"></div></div>
+    <div class="loader-note" id="loaderNote">در حال آماده‌سازی تجربه دیجیتال...</div>
+  </div>
+</div>
+
+<header id="header">
+  <div class="container nav">
+    <a class="brand" href="#home" aria-label="دیجی مدیا">
+      <span class="brand-mark"><img src="images/digimedia-logo.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span>DM</span></span>
+      <span>دیجی مدیا</span>
+    </a>
+    <nav class="nav-links" aria-label="ناوبری اصلی">
+      <a href="#home">خانه</a><a href="#about">درباره ما</a><a href="#services">خدمات ما</a><a href="#contact" class="nav-cta">ارتباط با ما</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="باز کردن منو" aria-expanded="false">☰</button>
+  </div>
+  <nav class="mobile-nav glass" id="mobileNav">
+    <a href="#home">خانه</a><a href="#about">درباره ما</a><a href="#services">خدمات ما</a><a href="#contact">ارتباط با ما</a>
+  </nav>
+</header>
+
+<main>
+<section id="home" class="hero-wrap">
+  <div class="hero-sticky">
+    <canvas id="heroCanvas" aria-label="انیمیشن تصویری دیجی مدیا"></canvas>
+    <div class="hero-overlay"></div>
+    <div class="hero-floats" aria-hidden="true">
+      <div class="float-card f1">⚡</div><div class="float-card f2">◈</div><div class="float-card f3">◎</div><div class="float-card f4">⌁</div>
+    </div>
+    <div class="container hero-content">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="dot"></span>مرجع خدمات و محصولات دیجیتالی</div>
+        <h1><span class="gradient-text">دیجی مدیا</span></h1>
+        <p class="hero-desc">با ما یک قدم جلوتر باش</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#services">خدمات ما <span>←</span></a>
+          <a class="btn btn-secondary" href="#about">درباره ما</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll"><div class="mouse"></div><span>برای ادامه اسکرول کنید</span></div>
+  </div>
+</section>
+
+<div class="ticker" aria-label="خدمات دیجی مدیا">
+  <div class="ticker-track">
+    <span>طراحی ربات <i></i></span><span>اینستاگرام <i></i></span><span>تلگرام <i></i></span><span>اخذ نمایندگی <i></i></span>
+    <span>طراحی ربات <i></i></span><span>اینستاگرام <i></i></span><span>تلگرام <i></i></span><span>اخذ نمایندگی <i></i></span>
+  </div>
+</div>
+
+<section id="about" class="section">
+  <div class="container about-grid">
+    <div class="about-copy reveal">
+      <div class="kicker">چرا دیجی مدیا</div>
+      <h2 class="section-title">قدرت دیجیتال با تخصص و کیفیت</h2>
+      <p>دیجی مدیا یک تیم حرفه‌ای و تخصصی در زمینه خدمات سوشال مدیا و طراحی ربات‌های پیشرفته است. با بیش از ۳ سال سابقه، تلاش می‌کنیم خدمات دیجیتال را با قیمت‌های فوق‌العاده، سرعت بالا و کیفیتی حرفه‌ای ارائه کنیم.</p>
+      <p>از ارائه خدمات اینستاگرام و تلگرام تا طراحی ربات‌های فروشگاهی، مدیریتی و اختصاصی؛ سفارشات در دیجی مدیا با وسواس بالا انجام می‌شوند. پشتیبانی سریع، خدمات پس از فروش و راهنمایی کامل و تخصصی، بخش مهمی از تعهد ما به مشتریان است. هدف ما ارائه یک تجربه حرفه‌ای، سریع و مطمئن در دنیای دیجیتال است.</p>
+    </div>
+    <div class="about-visual reveal" aria-hidden="true">
+      <div class="orb"><div class="orb-center">DM</div></div>
+      <div class="mini-chip mc1">ربات اختصاصی</div><div class="mini-chip mc2">سوشال مدیا</div><div class="mini-chip mc3">پشتیبانی سریع</div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="section services">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="kicker">ارزان اما حرفه ای</div>
+      <h2 class="section-title">خدمات دیجی مدیا</h2>
+      <p class="section-text">ارائه خدمات حرفه‌ای سوشال مدیا و طراحی ربات‌های پیشرفته، با سرعت بالا، کیفیت عالی و پشتیبانی تخصصی.</p>
+    </div>
+    <div class="service-grid">
+      <article class="service-card glass reveal">
+        <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="3" width="16" height="18" rx="4"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M8 15h8M12 3V1M8 21v1M16 21v1"/></svg></div>
+        <h3>طراحی انواع ربات اختصاصی</h3>
+        <p>طراحی و توسعه ربات‌های تلگرامی حرفه‌ای و اختصاصی؛ از ربات‌های فروشگاهی و مدیریتی تا سیستم‌های پیشرفته با قابلیت‌های متنوع و قابل توسعه.</p>
+        <div class="card-glow"></div>
+      </article>
+      <article class="service-card glass reveal">
+        <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></div>
+        <h3>اینستاگرام</h3>
+        <p>ارائه خدمات تخصصی اینستاگرام شامل فالور، لایک، ویو، کامنت، سین استوری، بازدید لایو، شییر و سیو پست با سرعت بالا و کیفیت حرفه‌ای.</p>
+        <div class="card-glow"></div>
+      </article>
+      <article class="service-card glass reveal">
+        <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 3 3.5 10.2c-.8.3-.8 1.4 0 1.7l6.2 2.1 2.1 6.2c.3.8 1.4.8 1.7 0L21 3Z"/><path d="m9.7 14.1 5.2-5.2"/></svg></div>
+        <h3>تلگرام</h3>
+        <p>ارائه خدمات حرفه‌ای تلگرام شامل ممبر، بازدید، ری‌اکشن و تبلیغات تلگرامی با سرعت بالا، کیفیت مناسب و پشتیبانی تخصصی.</p>
+        <div class="card-glow"></div>
+      </article>
+    </div>
+    <div class="bot-banner glass reveal">
+      <div><strong>ثبت سفارش و مشاهده قیمت‌ها</strong><small>جزئیات سفارش و قیمت‌های نهایی از طریق ربات دریافت می‌شوند.</small></div>
+      <a class="btn btn-primary" href="https://t.me/digimediabot" target="_blank" rel="noopener">سفارش از طریق ربات ↗</a>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="section contact">
+  <div class="container">
+    <div class="contact-card glass reveal">
+      <div>
+        <div class="kicker">ارتباط با تیم ما</div>
+        <h2>با دیجی مدیا در ارتباط باشید.</h2>
+        <p>برای دریافت مشاوره، ثبت سفارش و اطلاع از قیمت‌ها با تیم دیجی مدیا در ارتباط باشید. کارشناسان ما آماده پاسخگویی سریع و تخصصی به سوالات شما هستند.</p>
+      </div>
+      <div class="contact-actions">
+        <a class="btn btn-primary" href="https://t.me/digimedia_admin" target="_blank" rel="noopener">@digimedia_admin ↗</a>
+        <button class="btn btn-secondary" id="copyBtn" type="button">کپی آیدی ادمین</button>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-brand">دیجی مدیا</div>
+    <div>قدرت دیجیتال، ساده‌تر و حرفه‌ای‌تر</div>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="بازگشت به ابتدای صفحه">↑</button>
+<div class="toast" id="toast">آیدی کپی شد</div>
+
+<script>
+const HERO = {
+  count: 75,
+  first: "hero vid_000.jpg",
+  last: "hero vid_074.jpg",
+  folder: "images"
+};
+
+// Filename range is authoritative; count is validated against it.
+function parseFrameName(name){
+  const m=name.match(/^(.*?)(\d+)(\.[^.]+)$/);
+  if(!m) throw new Error("Invalid Hero filename: "+name);
+  return {prefix:m[1], number:Number(m[2]), pad:m[2].length, ext:m[3]};
+}
+const firstInfo=parseFrameName(HERO.first);
+const lastInfo=parseFrameName(HERO.last);
+const rangeCount=Math.abs(lastInfo.number-firstInfo.number)+1;
+const total=Math.min(HERO.count,rangeCount);
+const start=Math.min(firstInfo.number,lastInfo.number);
+const end=start+total-1;
+const pad=n=>String(n).padStart(firstInfo.pad,"0");
+const frameName=n=>firstInfo.prefix+pad(n)+firstInfo.ext;
+const frameURL=n=>encodeURI(HERO.folder+"/"+frameName(n));
+const middleIndex=Math.floor((total-1)/2);
+
+const canvas=document.getElementById("heroCanvas");
+const ctx=canvas.getContext("2d",{alpha:false});
+const frames=new Array(total);
+let loaded=0, currentFrame=-1, targetFrame=middleIndex, raf=0;
+
+function resizeCanvas(){
+  const dpr=Math.min(window.devicePixelRatio||1,1.75);
+  const w=canvas.clientWidth||innerWidth,h=canvas.clientHeight||innerHeight;
+  canvas.width=Math.floor(w*dpr);canvas.height=Math.floor(h*dpr);
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  draw(currentFrame>=0?currentFrame:middleIndex);
+}
+function draw(i){
+  if(!frames[i]) return;
+  const img=frames[i], w=canvas.clientWidth,h=canvas.clientHeight;
+  const scale=Math.max(w/img.naturalWidth,h/img.naturalHeight);
+  const dw=img.naturalWidth*scale,dh=img.naturalHeight*scale;
+  ctx.clearRect(0,0,w,h);
+  ctx.drawImage(img,(w-dw)/2,(h-dh)/2,dw,dh);
+  currentFrame=i;
+}
+function render(){
+  raf=0;
+  if(currentFrame!==targetFrame){
+    const step=Math.max(1,Math.ceil(Math.abs(targetFrame-currentFrame)/3));
+    currentFrame += targetFrame>currentFrame?step:-step;
+    currentFrame=Math.max(0,Math.min(total-1,currentFrame));
+    draw(currentFrame);
+    raf=requestAnimationFrame(render);
+  }
+}
+function setTarget(i){
+  targetFrame=Math.max(0,Math.min(total-1,Math.round(i)));
+  if(!raf) raf=requestAnimationFrame(render);
+}
+function preload(){
+  const fill=document.getElementById("loaderFill"), note=document.getElementById("loaderNote");
+  let completed=0;
+  for(let i=0;i<total;i++){
+    const img=new Image();
+    img.decoding="async";
+    img.onload=()=>{frames[i]=img;completed++;loaded=completed;fill.style.width=(completed/total*100)+"%";
+      note.textContent=`آماده‌سازی ${completed} از ${total}`;
+      if(i===middleIndex) draw(middleIndex);
+      if(completed===total) finishLoader();
+    };
+    img.onerror=()=>{completed++;fill.style.width=(completed/total*100)+"%"; if(completed===total) finishLoader()};
+    img.src=frameURL(start+i);
+  }
+  setTimeout(finishLoader,6500);
+}
+let loaderFinished=false;
+function finishLoader(){
+  if(loaderFinished)return; loaderFinished=true;
+  const l=document.getElementById("loader");
+  l.classList.add("done");
+  if(currentFrame<0) draw(middleIndex);
+}
+function heroScroll(){
+  const section=document.querySelector(".hero-wrap");
+  const rect=section.getBoundingClientRect();
+  const travel=section.offsetHeight-innerHeight;
+  const p=Math.max(0,Math.min(1,-rect.top/travel));
+  setTarget(p*(total-1));
+  document.getElementById("progress").style.width=(Math.min(1,Math.max(0,(window.scrollY)/(document.documentElement.scrollHeight-innerHeight)))*100)+"%";
+}
+let scrollTick=false;
+addEventListener("scroll",()=>{
+  if(!scrollTick){requestAnimationFrame(()=>{heroScroll();scrollTick=false});scrollTick=true}
+},{passive:true});
+addEventListener("resize",resizeCanvas,{passive:true});
+
+const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
+if(reduced){
+  document.querySelector(".hero-wrap").style.height="100vh";
+}
+preload();
+resizeCanvas();
+
+const header=document.getElementById("header"), toTop=document.getElementById("toTop");
+addEventListener("scroll",()=>{
+  header.classList.toggle("scrolled",scrollY>30);
+  toTop.classList.toggle("show",scrollY>650);
+},{passive:true});
+toTop.onclick=()=>scrollTo({top:0,behavior:reduced?"auto":"smooth"});
+
+const menuBtn=document.getElementById("menuBtn"), mobile=document.getElementById("mobileNav");
+menuBtn.onclick=()=>{const open=mobile.classList.toggle("open");menuBtn.setAttribute("aria-expanded",open)};
+mobile.querySelectorAll("a").forEach(a=>a.onclick=()=>mobile.classList.remove("open"));
+
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("visible")});
+},{threshold:.13});
+document.querySelectorAll(".reveal").forEach((el,i)=>{el.style.transitionDelay=Math.min(i*70,280)+"ms";observer.observe(el)});
+
+document.getElementById("copyBtn").onclick=async()=>{
+  try{await navigator.clipboard.writeText("@digimedia_admin")}
+  catch(e){
+    const ta=document.createElement("textarea");ta.value="@digimedia_admin";document.body.appendChild(ta);ta.select();document.execCommand("copy");ta.remove();
+  }
+  const t=document.getElementById("toast");t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1800);
+};
+
+// Gentle pointer parallax only on devices with a fine pointer.
+if(matchMedia("(hover:hover) and (pointer:fine)").matches && !reduced){
+  const floats=document.querySelectorAll(".float-card");
+  addEventListener("pointermove",e=>{
+    const x=(e.clientX/innerWidth-.5),y=(e.clientY/innerHeight-.5);
+    floats.forEach((el,i)=>{const s=(i+1)*3;el.style.transform=`translate(${x*s}px,${y*s}px)`});
+  },{passive:true});
+}
+</script>
+</body>
+</html>
